@@ -176,21 +176,17 @@ const ExamPage = () => {
   if (examSubmitted) {
     return (
       <ResultsModal
-        questions={mockQuestions}
+        questions={questions}
         userAnswers={userAnswers}
         onClose={() => {
-          // Reset exam
-          setExamSubmitted(false);
-          setCurrentQuestionIndex(0);
-          setUserAnswers({});
-          setQuestionStatus({});
-          setTimeLeft(60 * 60);
+          // Navigate back to setup
+          navigate('/');
         }}
       />
     );
   }
 
-  const currentQuestion = mockQuestions[currentQuestionIndex];
+  const currentQuestion = questions[currentQuestionIndex];
   const selectedAnswer = userAnswers[currentQuestion.id];
 
   return (
