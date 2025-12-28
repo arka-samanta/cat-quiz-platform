@@ -1,5 +1,6 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import QuestionSetup from "./pages/QuestionSetup";
 import ExamPage from "./pages/ExamPage";
 import { Toaster } from "./components/ui/toaster";
 
@@ -8,7 +9,8 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<ExamPage />} />
+          <Route path="/" element={<QuestionSetup />} />
+          <Route path="/exam" element={<ExamPage />} />
         </Routes>
       </BrowserRouter>
       <Toaster />
