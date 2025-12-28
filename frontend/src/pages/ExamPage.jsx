@@ -200,6 +200,14 @@ const ExamPage = () => {
               <p className="text-sm text-slate-600 mt-1">Section: Quantitative Aptitude & Reasoning</p>
             </div>
             <div className="flex items-center gap-6">
+              <Button
+                onClick={() => navigate('/')}
+                variant="outline"
+                className="border-slate-300"
+              >
+                <ArrowLeft className="w-4 h-4 mr-2" />
+                Back to Setup
+              </Button>
               <div className="flex items-center gap-2 bg-slate-100 px-4 py-2 rounded-lg">
                 <Clock className="w-5 h-5 text-slate-700" />
                 <span className={`text-lg font-semibold ${
