@@ -170,7 +170,13 @@ const ExamPage = () => {
   // Don't render until questions are loaded
   if (questions.length === 0) {
     return (
-      <div className=\"min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 flex items-center justify-center\">\n        <div className=\"text-center\">\n          <div className=\"animate-spin rounded-full h-12 w-12 border-b-2 border-slate-800 mx-auto mb-4\"></div>\n          <p className=\"text-slate-600\">Loading exam...</p>\n        </div>\n      </div>\n    );
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-slate-800 mx-auto mb-4"></div>
+          <p className="text-slate-600">Loading exam...</p>
+        </div>
+      </div>
+    );
   }
 
   if (examSubmitted) {
