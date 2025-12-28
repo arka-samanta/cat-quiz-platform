@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Clock, Send } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { Clock, Send, ArrowLeft } from 'lucide-react';
 import { mockQuestions } from '../mock';
 import QuestionDisplay from '../components/QuestionDisplay';
 import QuestionNavigation from '../components/QuestionNavigation';
@@ -8,13 +9,31 @@ import { Button } from '../components/ui/button';
 import { useToast } from '../hooks/use-toast';
 
 const ExamPage = () => {
+  const navigate = useNavigate();
+  const { toast } = useToast();
+  const [questions, setQuestions] = useState([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [userAnswers, setUserAnswers] = useState({});
   const [questionStatus, setQuestionStatus] = useState({});
   const [timeLeft, setTimeLeft] = useState(60 * 60); // 60 minutes in seconds
   const [examSubmitted, setExamSubmitted] = useState(false);
   const [showSubmitDialog, setShowSubmitDialog] = useState(false);
-  const { toast } = useToast();
+
+  // Load questions from localStorage or use mock data
+  useEffect(() => {
+    const storedQuestions = localStorage.getItem('examQuestions');
+    if (storedQuestions) {
+      try {
+        const parsed = JSON.parse(storedQuestions);
+        setQuestions(parsed);
+      } catch (error) {
+        console.error('Error parsing questions:', error);
+        setQuestions(mockQuestions);
+      }
+    } else {
+      setQuestions(mockQuestions);
+    }
+  }, []);
 
   // Timer countdown
   useEffect(() => {
