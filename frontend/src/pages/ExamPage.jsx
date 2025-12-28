@@ -238,7 +238,7 @@ const ExamPage = () => {
               selectedAnswer={selectedAnswer}
               onAnswerSelect={handleAnswerSelect}
               questionNumber={currentQuestionIndex + 1}
-              totalQuestions={mockQuestions.length}
+              totalQuestions={questions.length}
             />
 
             {/* Action Buttons */}
