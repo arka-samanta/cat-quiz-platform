@@ -32,6 +32,7 @@ const ExamPage = () => {
     }, 1000);
 
     return () => clearInterval(timer);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [examSubmitted]);
 
   // Format time as HH:MM:SS
