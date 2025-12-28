@@ -271,7 +271,7 @@ const ExamPage = () => {
           {/* Question Navigation - 20% */}
           <div className="w-[280px]">
             <QuestionNavigation
-              questions={mockQuestions}
+              questions={questions}
               currentQuestionIndex={currentQuestionIndex}
               questionStatus={questionStatus}
               userAnswers={userAnswers}
