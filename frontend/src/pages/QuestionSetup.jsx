@@ -145,10 +145,29 @@ const QuestionSetup = () => {
     reader.onload = (e) => {
       try {
         const imported = JSON.parse(e.target.result);
-        setQuestions(imported);
+        
+        // Check if it's the new format with "questions" array
+        let questionsToImport = imported;
+        
+        if (imported.questions && Array.isArray(imported.questions)) {
+          // Convert from uploaded format to our internal format
+          questionsToImport = imported.questions.map((q) => ({
+            id: q.question_id,
+            question: q.question,
+            options: [
+              { id: 'A', text: q.options.A },
+              { id: 'B', text: q.options.B },
+              { id: 'C', text: q.options.C },
+              { id: 'D', text: q.options.D },
+            ],
+            correctAnswer: q.correct_option,
+          }));
+        }
+        
+        setQuestions(questionsToImport);
         toast({
           title: 'Questions Imported',
-          description: `${imported.length} questions loaded successfully.`,
+          description: `${questionsToImport.length} questions loaded successfully.`,
         });
       } catch (error) {
         toast({
