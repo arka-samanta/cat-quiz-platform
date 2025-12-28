@@ -85,7 +85,7 @@ const ExamPage = () => {
 
   const handleQuestionClick = (index) => {
     // Mark current question as visited if not already
-    const questionId = mockQuestions[currentQuestionIndex].id;
+    const questionId = questions[currentQuestionIndex].id;
     if (!questionStatus[questionId]) {
       setQuestionStatus((prev) => ({
         ...prev,
@@ -96,7 +96,7 @@ const ExamPage = () => {
   };
 
   const handleSaveAndNext = () => {
-    const questionId = mockQuestions[currentQuestionIndex].id;
+    const questionId = questions[currentQuestionIndex].id;
     const hasAnswer = userAnswers[questionId];
 
     if (hasAnswer) {
@@ -112,13 +112,13 @@ const ExamPage = () => {
     }
 
     // Move to next question
-    if (currentQuestionIndex < mockQuestions.length - 1) {
+    if (currentQuestionIndex < questions.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
     }
   };
 
   const handleMarkForReview = () => {
-    const questionId = mockQuestions[currentQuestionIndex].id;
+    const questionId = questions[currentQuestionIndex].id;
     const hasAnswer = userAnswers[questionId];
 
     if (hasAnswer) {
@@ -134,13 +134,13 @@ const ExamPage = () => {
     }
 
     // Move to next question
-    if (currentQuestionIndex < mockQuestions.length - 1) {
+    if (currentQuestionIndex < questions.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
     }
   };
 
   const handleClearSelection = () => {
-    const questionId = mockQuestions[currentQuestionIndex].id;
+    const questionId = questions[currentQuestionIndex].id;
     setUserAnswers((prev) => {
       const newAnswers = { ...prev };
       delete newAnswers[questionId];
@@ -160,12 +160,18 @@ const ExamPage = () => {
   };
 
   const handleAnswerSelect = (optionId) => {
-    const questionId = mockQuestions[currentQuestionIndex].id;
+    const questionId = questions[currentQuestionIndex].id;
     setUserAnswers((prev) => ({
       ...prev,
       [questionId]: optionId,
     }));
   };
+
+  // Don't render until questions are loaded
+  if (questions.length === 0) {
+    return (
+      <div className=\"min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 flex items-center justify-center\">\n        <div className=\"text-center\">\n          <div className=\"animate-spin rounded-full h-12 w-12 border-b-2 border-slate-800 mx-auto mb-4\"></div>\n          <p className=\"text-slate-600\">Loading exam...</p>\n        </div>\n      </div>\n    );
+  }
 
   if (examSubmitted) {
     return (
